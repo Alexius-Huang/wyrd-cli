@@ -1,0 +1,24 @@
+{
+  "name": "wyrd-cli",
+  "version": "0.0.1-alpha",
+  "description": "Wyrd compiler command line interface",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc --watch"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "wyrd": "./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@wyrd/compiler": "0.0.2-alpha",
+    "colors": "^1.4.0",
+    "commander": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.6"
+  }
+}
