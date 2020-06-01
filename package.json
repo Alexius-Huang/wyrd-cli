@@ -1,5 +1,5 @@
 {
-  "name": "wyrd-cli",
+  "name": "@wyrd/cli",
   "version": "0.0.1-alpha",
   "description": "Wyrd compiler command line interface",
   "main": "./bin/index.js",
