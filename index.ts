@@ -26,8 +26,10 @@ if (program.entry) {
     } else {
       const fileDir = path.dirname(filePath);
       const { result } = compile({ dir: fileDir, entry: fileName });
-    
-      fs.writeFileSync(path.join(process.cwd(), `${fileName}.js`), result);    
+
+      const compiledFileName = `${fileName.replace(/\.wyrd$/, '')}.js`;
+      fs.writeFileSync(path.join(process.cwd(), compiledFileName), result);
+      console.log(`Emit result: ${compiledFileName.cyan}`);
     }
   }
 };

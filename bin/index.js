@@ -33,7 +33,9 @@ if (commander_1.program.entry) {
         else {
             var fileDir = path.dirname(filePath);
             var result = compiler_1.compile({ dir: fileDir, entry: fileName }).result;
-            fs.writeFileSync(path.join(process.cwd(), fileName + ".js"), result);
+            var compiledFileName = fileName.replace(/\.wyrd$/, '') + ".js";
+            fs.writeFileSync(path.join(process.cwd(), compiledFileName), result);
+            console.log("Emit result: " + compiledFileName.cyan);
         }
     }
 }
