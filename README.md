@@ -16,11 +16,11 @@ Install the command line interface:
 Simply compile the Wyrd program:
 
 ```
-> wyrd -e=./hello.wyrd
+> wyrd -e ./hello.wyrd
 ```
 
 Or:
 
 ```
-> wyrd --entry=./hello.wyrd
+> wyrd --entry ./hello.wyrd
 ```
