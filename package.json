@@ -2,13 +2,13 @@
   "name": "wyrd-cli",
   "version": "0.0.1-alpha",
   "description": "Wyrd compiler command line interface",
-  "main": "index.js",
+  "main": "./bin/index.js",
   "scripts": {
     "dev": "tsc --watch"
   },
   "preferGlobal": true,
   "bin": {
-    "wyrd": "./index.js"
+    "wyrd": "./bin/index.js"
   },
   "keywords": [],
   "author": "",
