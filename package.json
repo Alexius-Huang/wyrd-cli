@@ -1,6 +1,6 @@
 {
   "name": "@wyrd/cli",
-  "version": "0.0.2-alpha4",
+  "version": "0.0.2-alpha5",
   "description": "Wyrd compiler command line interface",
   "main": "./bin/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wyrd/compiler": "0.0.2-alpha",
+    "@wyrd/compiler": "0.0.1-alpha1",
     "colors": "^1.4.0",
     "commander": "^5.1.0"
   },
