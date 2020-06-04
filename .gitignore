@@ -1,2 +1,3 @@
 **/*.wyrd
+test-folder/**/*
 node_modules

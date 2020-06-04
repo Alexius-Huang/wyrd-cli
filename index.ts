@@ -13,23 +13,25 @@ program
 program.parse(process.argv);
 
 if (program.entry) {
-  const filePath = path.join(process.cwd(), program.entry);
-  if (!fs.existsSync(filePath))
-    console.log(`File didn't exists: ${filePath}`.red);
+  const entry = path.join(process.cwd(), program.entry);
+  if (!fs.existsSync(entry))
+    console.log(`File didn't exists: ${entry}`.red);
   else {
-    const fileName = path.basename(filePath);
+    const fileDir = path.dirname(entry);
+    const fileName = path.basename(entry);
     const extName = path.extname(fileName);
+
     if (extName !== '.wyrd') {
       console.log(`Entry file should have \`.wyrd\` extension.`.red);
     } else if (/.lib$/.test(fileName)) {
       console.log(`Wyrd compiler is not expected to compile library file directly, it should be imported by other Wyrd program`.red);
     } else {
-      const fileDir = path.dirname(filePath);
-      const { result } = compile({ dir: fileDir, entry: fileName });
+      const { result } = compile({ entry });
 
       const compiledFileName = `${fileName.replace(/\.wyrd$/, '')}.js`;
-      fs.writeFileSync(path.join(process.cwd(), compiledFileName), result);
-      console.log(`Emit result: ${compiledFileName.cyan}`);
+      const compiledFilePath = path.join(fileDir, compiledFileName);
+      fs.writeFileSync(compiledFilePath, result);
+      console.log(`Emit result: ${compiledFilePath.cyan}`);
     }
   }
 };
