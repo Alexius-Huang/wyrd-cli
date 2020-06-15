@@ -25,13 +25,15 @@ if (program.entry) {
       console.log(`Entry file should have \`.wyrd\` extension.`.red);
     } else if (/.lib$/.test(fileName)) {
       console.log(`Wyrd compiler is not expected to compile library file directly, it should be imported by other Wyrd program`.red);
-    } else {
+    } else try {
       const { result } = compile({ entry });
 
       const compiledFileName = `${fileName.replace(/\.wyrd$/, '')}.js`;
       const compiledFilePath = path.join(fileDir, compiledFileName);
       fs.writeFileSync(compiledFilePath, result);
       console.log(`Emit result: ${compiledFilePath.cyan}`);
+    } catch (err) {
+      console.log(err.message.red);
     }
   }
 };

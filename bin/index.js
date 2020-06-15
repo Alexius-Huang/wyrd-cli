@@ -31,13 +31,17 @@ if (commander_1.program.entry) {
         else if (/.lib$/.test(fileName)) {
             console.log("Wyrd compiler is not expected to compile library file directly, it should be imported by other Wyrd program".red);
         }
-        else {
-            var result = compiler_1.compile({ entry: entry }).result;
-            var compiledFileName = fileName.replace(/\.wyrd$/, '') + ".js";
-            var compiledFilePath = path.join(fileDir, compiledFileName);
-            fs.writeFileSync(compiledFilePath, result);
-            console.log("Emit result: " + compiledFilePath.cyan);
-        }
+        else
+            try {
+                var result = compiler_1.compile({ entry: entry }).result;
+                var compiledFileName = fileName.replace(/\.wyrd$/, '') + ".js";
+                var compiledFilePath = path.join(fileDir, compiledFileName);
+                fs.writeFileSync(compiledFilePath, result);
+                console.log("Emit result: " + compiledFilePath.cyan);
+            }
+            catch (err) {
+                console.log(err.message.red);
+            }
     }
 }
 ;
