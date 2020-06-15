@@ -18,11 +18,12 @@ commander_1.program
     .option('-e, --entry <string>', 'entry of wyrd file');
 commander_1.program.parse(process.argv);
 if (commander_1.program.entry) {
-    var filePath = path.join(process.cwd(), commander_1.program.entry);
-    if (!fs.existsSync(filePath))
-        console.log(("File didn't exists: " + filePath).red);
+    var entry = path.join(process.cwd(), commander_1.program.entry);
+    if (!fs.existsSync(entry))
+        console.log(("File didn't exists: " + entry).red);
     else {
-        var fileName = path.basename(filePath);
+        var fileDir = path.dirname(entry);
+        var fileName = path.basename(entry);
         var extName = path.extname(fileName);
         if (extName !== '.wyrd') {
             console.log("Entry file should have `.wyrd` extension.".red);
@@ -30,13 +31,17 @@ if (commander_1.program.entry) {
         else if (/.lib$/.test(fileName)) {
             console.log("Wyrd compiler is not expected to compile library file directly, it should be imported by other Wyrd program".red);
         }
-        else {
-            var fileDir = path.dirname(filePath);
-            var result = compiler_1.compile({ dir: fileDir, entry: fileName }).result;
-            var compiledFileName = fileName.replace(/\.wyrd$/, '') + ".js";
-            fs.writeFileSync(path.join(process.cwd(), compiledFileName), result);
-            console.log("Emit result: " + compiledFileName.cyan);
-        }
+        else
+            try {
+                var result = compiler_1.compile({ entry: entry }).result;
+                var compiledFileName = fileName.replace(/\.wyrd$/, '') + ".js";
+                var compiledFilePath = path.join(fileDir, compiledFileName);
+                fs.writeFileSync(compiledFilePath, result);
+                console.log("Emit result: " + compiledFilePath.cyan);
+            }
+            catch (err) {
+                console.log(err.message.red);
+            }
     }
 }
 ;
